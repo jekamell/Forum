@@ -3,14 +3,14 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <html>
 <head>
-    <title><tiles:insertAttribute name="title" /></title>
-    <link rel="stylesheet" href="<s:url value="/resources" />" type="text/css"/>
+    <title><tiles:insertAttribute name="title"/></title>
+    <link rel="stylesheet" href="<s:url value="/resources" />/css/bootstrap.css" type="text/css"/>
+    <script src="<s:url value="/resources" />/js/jquery.min.js"></script>
+    <script src="<s:url value="/resources" />/js/bootstrap.js"></script>
 </head>
 
 <body>
 <div id="container">
-    <a href="<s:url value="/home" />">Home</a>
-
     <div id="header">
         <t:insertAttribute name="header"/>
     </div>
