@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <title><tiles:insertAttribute name="title"/></title>
@@ -15,7 +16,7 @@
         <t:insertAttribute name="header"/>
     </div>
 
-    <div id="content">
+    <div id="content" class="container">
         <t:insertAttribute name="content"/>
     </div>
 

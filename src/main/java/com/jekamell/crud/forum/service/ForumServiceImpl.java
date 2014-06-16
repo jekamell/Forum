@@ -1,34 +1,23 @@
 package com.jekamell.crud.forum.service;
 
-import com.jekamell.crud.forum.model.Post;
-import org.springframework.stereotype.Component;
+import com.jekamell.crud.forum.model.Category;
+import com.jekamell.crud.forum.model.dao.CategoryDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service("forumService")
 public class ForumServiceImpl implements ForumService {
-    @Override
-    public List<Post> getRecentPosts(int count) {
-        return null;
+    private CategoryDao hibernateCategoryDao;
+
+    @Autowired
+    public ForumServiceImpl(CategoryDao hibernateCategoryDao) {
+        this.hibernateCategoryDao = hibernateCategoryDao;
     }
 
     @Override
-    public void savePost(Post post) {
-
-    }
-
-    @Override
-    public Post getPost(Long id) {
-        return null;
-    }
-
-    @Override
-    public void deletePost(Long id) {
-
-    }
-
-    @Override
-    public List<Post> getAllPosts() {
-        return null;
+    public List<Category> getAllCategory() {
+        return hibernateCategoryDao.getAll();
     }
 }

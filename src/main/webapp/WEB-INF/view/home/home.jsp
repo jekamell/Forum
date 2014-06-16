@@ -3,5 +3,11 @@
 <%@ taglib prefix="t" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div>
-    <h3>Page body</h3>
+    <dl>
+    <c:forEach items="${categoryList}" var="category">
+        <h3><a href="#"><dt>${category.title}</dt></a></h3>
+        <dd>${category.description}</dd>
+        <br />
+    </c:forEach>
+    </dl>
 </div>
