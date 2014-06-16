@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service("hibernateCategoryDao")
@@ -36,7 +35,7 @@ public class HibernateCategoryDao implements CategoryDao {
         currentSession().update(category);
     }
 
-    public List getAll() {
-        return currentSession().createSQLQuery("SELECT * FROM `category`").addEntity(Category.class).list();
+    public List<Category> getAll() {
+        return currentSession().createSQLQuery("SELECT * FROM category").addEntity(Category.class).list();
     }
 }

@@ -14,8 +14,7 @@
 
     <context:component-scan base-package="com.jekamell.crud.forum"/>
 
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass">
             <value>
                 org.springframework.web.servlet.view.tiles2.TilesView

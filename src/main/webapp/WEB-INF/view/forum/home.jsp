@@ -5,7 +5,7 @@
 <div>
     <dl>
     <c:forEach items="${categoryList}" var="category">
-        <h3><a href="#"><dt>${category.title}</dt></a></h3>
+        <h3><a href="<s:url value="/category/${category.id}" />"><dt>${category.title}</dt></a></h3>
         <dd>${category.description}</dd>
         <br />
     </c:forEach>
