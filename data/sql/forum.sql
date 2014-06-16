@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.37, for debian-linux-gnu (i686)
 --
--- Host: localhost    Database: blog
+-- Host: localhost    Database: forum
 -- ------------------------------------------------------
 -- Server version	5.5.37-0ubuntu0.12.04.1
 
@@ -30,21 +30,22 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `post`
+-- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `post`;
+DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `post` (
+CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL DEFAULT '',
   `content` text NOT NULL,
-  `date_add` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_topic` int(11) NOT NULL,
   `id_author` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `id_author` (`id_author`),
-  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `user` (`id`)
+  KEY `id_topic` (`id_topic`),
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `user` (`id`),
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_topic`) REFERENCES `topic` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,7 +61,7 @@ CREATE TABLE `post_category_relation` (
   `id_category` int(11) NOT NULL DEFAULT '0',
   KEY `id_post` (`id_post`),
   KEY `id_category` (`id_category`),
-  CONSTRAINT `post_category_relation_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`),
+  CONSTRAINT `post_category_relation_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `topic` (`id`),
   CONSTRAINT `post_category_relation_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,6 +80,25 @@ CREATE TABLE `profile` (
   `web_site` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`owner_id`),
   CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `topic`
+--
+
+DROP TABLE IF EXISTS `topic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `topic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `date_add` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_author` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `id_author` (`id_author`),
+  CONSTRAINT `topic_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,4 +128,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-06-12 11:34:59
+-- Dump completed on 2014-06-16 11:53:16

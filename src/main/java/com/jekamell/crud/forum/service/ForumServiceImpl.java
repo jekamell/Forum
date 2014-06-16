@@ -1,12 +1,12 @@
-package com.jekamell.crud.blog.service;
+package com.jekamell.crud.forum.service;
 
-import com.jekamell.crud.blog.model.Post;
+import com.jekamell.crud.forum.model.Post;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class BlogServiceImpl implements BlogService {
+public class ForumServiceImpl implements ForumService {
     @Override
     public List<Post> getRecentPosts(int count) {
         return null;

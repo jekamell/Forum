@@ -9,7 +9,7 @@
     </definition>
 
     <definition name="home" extends="baseTemplate">
-        <put-attribute name="title" value="Blog home page" />
+        <put-attribute name="title" value="Forum" />
         <put-attribute name="content" value="/WEB-INF/view/home/home.jsp" />
     </definition>
 
