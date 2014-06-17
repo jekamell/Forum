@@ -8,16 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("hibernateTopicDao")
-public class HibernateTopicDao implements TopicDao {
-    private SessionFactory sessionFactory;
+public class HibernateTopicDao extends SessionContainer implements TopicDao {
 
     @Autowired
     public HibernateTopicDao(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public Session currentSession() {
-        return sessionFactory.getCurrentSession();
+        super(sessionFactory);
     }
 
     @Override
