@@ -28,7 +28,6 @@ public class ForumController {
 
     @RequestMapping({"/category/{id}"})
     public String showTopicsByCategory(@PathVariable(value = "id") final String id, Model model) {
-        System.out.println(forumService.getTopicList(Long.parseLong(id)).size());
         model.addAttribute("topicList", forumService.getTopicList(Long.parseLong(id)));
         return "list";
     }
