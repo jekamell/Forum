@@ -23,8 +23,14 @@ public class User {
 
     @Column(name = "email")
     @Pattern(regexp="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid E-mail address")
+    private String email;
 
-            private String email;
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    private UserRole role;
+
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
 
     public Long getId() {
         return id;
@@ -56,5 +62,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 }

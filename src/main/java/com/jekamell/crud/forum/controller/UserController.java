@@ -37,7 +37,7 @@ public class UserController {
     public String registrationForm(Model model) {
         model.addAttribute(new User());
 
-        return "user/registration-form";
+        return "user-registration-form";
     }
 
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
@@ -51,9 +51,6 @@ public class UserController {
             return "user/registration-form";
         }
 
-        System.out.println(user.getEmail());
-        System.out.println(user.getLogin());
-        System.out.println(user.getPassword());
         userService.addUser(user);
 
         try {
