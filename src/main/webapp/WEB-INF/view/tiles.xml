@@ -13,16 +13,25 @@
         <put-attribute name="content" value="/WEB-INF/view/forum/list-topic.jsp"/>
     </definition>
 
+    <definition name="add-topic" extends="template-base">
+        <put-attribute name="title" value="Add topic"/>
+        <put-attribute name="content" value="/WEB-INF/view/forum/add-topic.jsp"/>
+    </definition>
+
 
     <definition name="list-category" extends="template-base">
         <put-attribute name="title" value="Forum"/>
         <put-attribute name="content" value="/WEB-INF/view/forum/list-category.jsp"/>
     </definition>
 
-
-
-    <definition name="user/registration-form" extends="template-base">
+    <definition name="user-registration-form" extends="template-base">
         <put-attribute name="title" value="Sign up"/>
-        <put-attribute name="content" value="/WEB-INF/view/user/registration-form.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/user/form-registration.jsp"/>
     </definition>
+
+    <definition name="user-auth-form" extends="template-base">
+        <put-attribute name="title" value="Sign up"/>
+        <put-attribute name="content" value="/WEB-INF/view/user/form-auth.jsp"/>
+    </definition>
+
 </tiles-definitions>

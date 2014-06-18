@@ -37,7 +37,7 @@ public class UserController {
     public String registrationForm(Model model) {
         model.addAttribute(new User());
 
-        return "user/registration-form";
+        return "user-registration-form";
     }
 
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
