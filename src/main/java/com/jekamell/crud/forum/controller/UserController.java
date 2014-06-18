@@ -51,9 +51,6 @@ public class UserController {
             return "user/registration-form";
         }
 
-        System.out.println(user.getEmail());
-        System.out.println(user.getLogin());
-        System.out.println(user.getPassword());
         userService.addUser(user);
 
         try {

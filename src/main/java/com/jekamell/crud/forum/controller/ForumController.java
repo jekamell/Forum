@@ -10,25 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
 public class ForumController {
-    private ForumService forumService;
-
-    @Autowired
-    public void setForumService(ForumService forumService) {
-        this.forumService = forumService;
-    }
-
     @RequestMapping({"/", "/home"})
     public String showHomePage(Model model) {
-        model.addAttribute(forumService.getAllCategory());
-
-        return "home";
-    }
-
-    @RequestMapping({"/category/{id}"})
-    public String showTopicsByCategory(@PathVariable(value = "id") final String id, Model model) {
-        model.addAttribute("topicList", forumService.getTopicList(Long.parseLong(id)));
-        return "list";
+        return "redirect:/category";
     }
 }
