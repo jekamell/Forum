@@ -53,6 +53,7 @@ public class ForumServiceImpl implements ForumService {
 
     @Override
     public void addComment(Comment comment) {
+        System.out.println("comment: " + comment.getContent());
         hibernateCommentDao.addComment(comment);
     }
 }
