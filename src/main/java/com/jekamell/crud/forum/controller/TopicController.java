@@ -1,5 +1,6 @@
 package com.jekamell.crud.forum.controller;
 
+import com.jekamell.crud.forum.model.Comment;
 import com.jekamell.crud.forum.model.Topic;
 import com.jekamell.crud.forum.service.ForumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,27 @@ public class TopicController {
     @RequestMapping(value = "/topic/show/{id}", method = RequestMethod.GET)
     public String showTopic(@PathVariable Long id, Model model) {
         Topic topic = forumService.getTopic(id);
+        Comment comment = new Comment();
+        comment.setIdTopic(topic.getId());
         model.addAttribute(topic);
+        model.addAttribute(comment);
+        model.addAttribute("showModal", false);
 
         return "show-topic";
+    }
+
+    @RequestMapping(value = "/topic/add-comment", method = RequestMethod.POST)
+    public String addComment(@Valid Comment comment, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            Topic topic = forumService.getTopic(comment.getIdTopic());
+            model.addAttribute(topic);
+            model.addAttribute(comment);
+            model.addAttribute("showModal", bindingResult.hasErrors());
+
+            return "show-topic";
+        }
+        forumService.addComment(comment);
+
+        return "redirect:/topic/show/" + comment.getIdTopic();
     }
 }
