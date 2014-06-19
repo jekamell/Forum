@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <div>
-    <legend>Authentication form</legend>
+    <legend>Sign up</legend>
     <spring:url var="authUrl" value="/auth/login"/>
     <form method="post" class="form-horizontal" action="${authUrl}">
         <div class="form-group">

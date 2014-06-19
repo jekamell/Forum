@@ -6,8 +6,8 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/category/**/add-topic" access="ROLE_USER"/>
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/category/**/add-topic" access="hasRole('ROLE_USER') "/>
 
         <form-login login-processing-url="/auth/login"
                     login-page="/login"
