@@ -1,6 +1,8 @@
 package com.jekamell.crud.forum.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "topic")
@@ -10,13 +12,15 @@ public class Topic {
     private Long id;
 
     @Column(name = "title")
+    @Size(min = 1, max = 255)
     private String title;
 
+    @Size(min = 1, message = "Content cant be empty")
     @Column(name = "content")
     private String content;
 
     @Column(name = "id_author")
-    private Integer id_author;
+    private Long id_author;
 
     @Column(name = "id_category")
     private Integer id_category;
@@ -45,11 +49,11 @@ public class Topic {
         this.content = content;
     }
 
-    public Integer getId_author() {
+    public Long getId_author() {
         return id_author;
     }
 
-    public void setId_author(Integer id_author) {
+    public void setId_author(Long id_author) {
         this.id_author = id_author;
     }
 

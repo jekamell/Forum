@@ -30,4 +30,14 @@ public class ForumServiceImpl implements ForumService {
     public List<Topic> getTopicList(Long categoryId) {
         return hibernateTopicDao.getAllByCategory(categoryId);
     }
+
+    @Override
+    public void addTopic(Topic topic) {
+        hibernateTopicDao.addTopic(topic);
+    }
+
+    @Override
+    public Topic getTopic(Long id) {
+        return hibernateTopicDao.getTopic(id);
+    }
 }

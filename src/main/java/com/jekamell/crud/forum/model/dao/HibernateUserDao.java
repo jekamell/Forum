@@ -4,6 +4,7 @@ import com.jekamell.crud.forum.model.User;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +14,8 @@ import java.util.List;
 public class HibernateUserDao extends SessionContainer implements UserDao {
 
     @Autowired
-    public HibernateUserDao(SessionFactory sessionFactory) {
-        super(sessionFactory);
+    public HibernateUserDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
+        super(sessionFactory, securityContextHolder);
     }
 
     @Override
