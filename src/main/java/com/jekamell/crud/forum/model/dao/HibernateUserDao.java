@@ -1,16 +1,21 @@
 package com.jekamell.crud.forum.model.dao;
 
 import com.jekamell.crud.forum.model.User;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Service("hibernateUserDao")
 public class HibernateUserDao extends SessionContainer implements UserDao {
 
     @Autowired
-    public HibernateUserDao(SessionFactory sessionFactory) {
-        super(sessionFactory);
+    public HibernateUserDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
+        super(sessionFactory, securityContextHolder);
     }
 
     @Override
@@ -19,9 +24,16 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public User getUser(String userName) {
-        return (User) currentSession().createSQLQuery("SELECT * FROM user where login = :username")
-            .addEntity(User.class)
-            .setParameter("username", userName).uniqueResult();
+        Query query = currentSession().createQuery("from User where login = :login");
+        query.setString("login", userName);
+        List<User> users = query.list();
+        if(!users.isEmpty()) {
+
+            return users.get(0);
+        }
+
+        return null;
     }
 }

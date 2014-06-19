@@ -6,7 +6,7 @@
     <a class="btn btn-info" href="<s:url value="/category/${categoryId}/add-topic" />">add topic</a>
     <dl>
         <c:forEach items="${topicList}" var="topic">
-            <h3><a href="<s:url value="/showTopic/${topic.id}" />"><dt>${topic.title}</dt></a></h3>
+            <h3><a href="<s:url value="/topic/show/${topic.id}" />"><dt>${topic.title}</dt></a></h3>
             <small class="text-muted">${topic.content}</small>
         </c:forEach>
     </dl>

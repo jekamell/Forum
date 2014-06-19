@@ -4,6 +4,7 @@ import com.jekamell.crud.forum.model.Category;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -11,8 +12,8 @@ import java.util.List;
 public class HibernateCategoryDao extends SessionContainer implements CategoryDao {
 
     @Autowired
-    public HibernateCategoryDao(SessionFactory sessionFactory) {
-        super(sessionFactory);
+    public HibernateCategoryDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
+        super(sessionFactory, securityContextHolder);
     }
 
     @Override

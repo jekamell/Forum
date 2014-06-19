@@ -18,6 +18,10 @@
         <put-attribute name="content" value="/WEB-INF/view/forum/add-topic.jsp"/>
     </definition>
 
+    <definition name="show-topic" extends="template-base">
+        <put-attribute name="title" value="Add topic"/>
+        <put-attribute name="content" value="/WEB-INF/view/forum/show-topic.jsp"/>
+    </definition>
 
     <definition name="list-category" extends="template-base">
         <put-attribute name="title" value="Forum"/>
