@@ -21,6 +21,18 @@ public class Comment {
     @Column(name = "id_author")
     private Long idAuthor;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_topic", referencedColumnName = "id", insertable = false, updatable = false)
+    private Topic topic;
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
     public Long getId() {
         return id;
     }

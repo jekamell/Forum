@@ -5,9 +5,15 @@
 <p>
     <button class="btn btn-primary" data-toggle="modal" data-target="#modalComment">Add comment</button>
 </p>
-
 <div class="well" style="background-color: #dff0d8">${topic.content}</div>
+<hr/>
 
+<c:forEach items="${topic.comments}" var="comment">
+    <div class="well">${comment.content}</div>
+</c:forEach>
+<p>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modalComment">Add comment</button>
+</p>
 <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <sf:form method="POST" action="/topic/add-comment" modelAttribute="comment" role="form"

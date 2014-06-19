@@ -1,8 +1,9 @@
 package com.jekamell.crud.forum.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "topic")
@@ -24,6 +25,17 @@ public class Topic {
 
     @Column(name = "id_category")
     private Integer id_category;
+
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Comment.class, mappedBy = "topic", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getId() {
         return id;
