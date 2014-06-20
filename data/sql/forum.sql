@@ -16,31 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Comment`
---
-
-DROP TABLE IF EXISTS `Comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Comment` (
-  `id` bigint(20) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
-  `id_author` bigint(20) DEFAULT NULL,
-  `id_topic` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Comment`
---
-
-LOCK TABLES `Comment` WRITE;
-/*!40000 ALTER TABLE `Comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `category`
 --
 
@@ -61,7 +36,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Городские новости и события','Городские новости, события, анонсы, приглашения (события могут быть не только городского масштаба...)'),(2,'Новости Украины и мира, общие темы','Обсуждения всего наиболее наболевшего и важного на текущий момент...'),(3,'Обсуждение товаров и услуг','Обсуждение товаров и услуг, торговых марок, продукции, качества сервиса, в т.ч. коммунального, прав потребителя и т.п.'),(4,'Образование и трудоустройство','ВУЗы и школы, курсы, семинары, тренинги, лекции... Трудоустройство.'),(5,'Транспорт','Всяческий транспорт, дороги, проблемы перевозок.');
+INSERT INTO `category` VALUES (1,'Announcements','Announcements and general project news'),(2,'Container','Discussion on Spring\'s dependency injection container, including XML and annotation-based configuration.'),(3,'Data','Discussion on data access with Spring. This forum is for Spring Data Community Extensions like Solr, Elasticsearch, Couchbase, FuzzyDB.'),(4,'Security','Discussing on securing applications with Spring Security and its extensions.'),(5,'Web','Discussion on developing web applications with Spring, including usage of Spring MVC and its REST support, as well as the HATEOAS, Web Flow, and Social projects.');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +57,7 @@ CREATE TABLE `comment` (
   KEY `id_topic` (`id_topic`),
   CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `user` (`id`),
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_topic`) REFERENCES `topic` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +66,6 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'qw\r\nÐ°Ð°Ð°',4,1),(2,'Ð¹ÑÑ',4,1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +114,7 @@ CREATE TABLE `topic` (
   KEY `id_category` (`id_category`),
   CONSTRAINT `topic_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `user` (`id`),
   CONSTRAINT `topic_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +123,7 @@ CREATE TABLE `topic` (
 
 LOCK TABLES `topic` WRITE;
 /*!40000 ALTER TABLE `topic` DISABLE KEYS */;
-INSERT INTO `topic` VALUES (4,'Помощь беженцам (Общая тема)','Забираю родственницу из Славянска. Кто знает куда обратиться, чтобы ей и ее сыну(11- ти лет) оказали помощь?','2014-06-16 15:32:37',1,1),(5,'Озеро на ж/м Победа-6','то озеро на Победе-6. Когда-то оно было очень симпатичным, в нем купались детки, рыбаки ловили рыбешку, люди приходили просто посидеть на бережку.','2014-06-16 15:32:37',1,1),(6,'Что будет с \"Метеором\"?','Интересно, что будет со стадионом «Метеор» после открытия «Днепра»? Ведь «Метеор» ФК арендовал, а теперь у них будет свое собственное высококачественное поле, и смысла играть на «Метеоре» даже матчи внутреннего чемпионата больше не будет. Будут ли на «Метеоре» проводится какие-то профессиональные футбольные матчи? Или всё ограничиться школьными спортивными турнирами и играми 1 и 2 лиг? Или стадион вообще разберут? \nКто в курсе? На официальном сайте Метеора об этом нет ни слова.','2014-06-16 15:32:37',1,1);
+INSERT INTO `topic` VALUES (1,'Spring Framework 3.2.5 Released','The fifth maintenance release in the Spring Framework 3.2.x line is now available via Maven Central or the SpringSource repository. This release includes nearly 50 bug fixes and improvements and we recommend that all users upgrade.','2014-06-20 07:51:29',1,1),(2,'Spring Scala 1.0.0.RC1 has been released','Dear Spring community,\r\n\r\nI\'m pleased to announce that Spring Scala 1.0.0.RC1 has been released! This is first release candidate in the release cycle. It contains numerous small changes, mainly to prepare for a 1.0.0.RELEASE.\r\n\r\nPlease give it a shot! As before the jar is available for download at our milestone repository, http://repo.springsource.org/libs-milestone. For Maven users:\r\n\r\n<repositories>\r\n    <repository>\r\n        <id>milestone.repo.springsource.org</id>\r\n        <name>repo.springsource.org-milestone</name>\r\n        <url>https://repo.springsource.org/libs-milestone</url>\r\n    </repository>\r\n</repositories>\r\n<dependency>\r\n    <groupId>org.springframework.scala</groupId>\r\n    <artifactId>spring-scala_2.10</artifactId>\r\n    <version>1.0.0.RC1</version>\r\n</dependency>\r\n\r\nNote that we have started to include the Scala version number in the artifactId, a common practice for Scala libraries. \r\n\r\nThanks,\r\n\r\nArjen','2014-06-20 07:56:56',1,1),(3,'Spring Web Services 2.1.4.RELEASE released','Dear Spring community,\r\n\r\nI\'m pleased to announce that Spring Web Services 2.1.4.RELEASE has been released!\r\n\r\nThis is the latest GA release in the 2.1 release cycle. It mainly consists of bug fixes.\r\n\r\nPlease see the changelog for more details.\r\n\r\nThis release is currently available on our Maven release repository, and will be available on Maven Central and the download page shortly.\r\n\r\nFor more information, refer to \r\n\r\nhttp://static.springframework.org/spring-ws/sites/2.0','2014-06-20 07:57:37',1,1),(4,'ApplicationContext.xml cannot be found when starting Tomcat server','Hi guys,\r\nI know that this question had to be asked about million times but i have tried all suggested solutions for this and none of them have worked. I hope that it is not against rules of this foreum but ionstead of writing it down again i post here my unanswered question from stack overflo \r\n\r\nhttp://stackoverflow.com/questions/2...62254_23008148\r\n\r\nthanks for your help in advance','2014-06-20 07:59:41',1,2),(5,'Help me on this','I am working on existing web project. It is just developed using jsp and servlets and deployed on tomcat.\r\n\r\nWeb app maintainnce configurations in seperate file for configuration parameters. It is like this\r\n\r\ntomcat/conf/app.conf\r\n\r\nNO_WORKING_DYS 10\r\nNO_PEOPLE 5\r\n......\r\n....\r\n\r\n\r\nApp is reading this file in context listner and keep values in a map. Then what happen is, web application needed to be restarted after changing a configuration value. If not, new config value is not picked up. I know it is obvious since we are reading the config file inside the context listener.\r\n\r\n\r\nI need to know is there any possibility to overcome this issue (change config values with out restating or redeploing) using spring\r\nIOC container..\r\n\r\n\r\nThannk you...','2014-06-20 08:03:47',1,2);
 /*!40000 ALTER TABLE `topic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-06-19 22:58:51
+-- Dump completed on 2014-06-21  0:21:38
