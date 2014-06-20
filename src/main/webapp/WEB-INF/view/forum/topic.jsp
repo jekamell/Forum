@@ -3,16 +3,31 @@
 <legend>${topic.title}</legend>
 
 <p>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#modalComment">Add comment</button>
+    <button class="btn btn-info" data-toggle="modal" data-target="#modalComment">Add comment</button>
 </p>
-<div class="well" style="background-color: #dff0d8">${topic.content}</div>
+
+
+<div class="well wMain">
+    <div class="wImageName">
+        <strong>User name</strong>
+        <img src="/" alt="username"/>
+    </div>
+    <div class="wContent">
+        <em class="wDate">11.11.11 11:11:11</em>
+        <h2>title</h2>
+        <p>${topic.content}</p>
+    </div>
+
+    <%--<div></div>--%>
+
+</div>
 <hr/>
 
 <c:forEach items="${topic.comments}" var="comment">
     <div class="well">${comment.content}</div>
 </c:forEach>
 <p>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#modalComment">Add comment</button>
+    <button class="btn btn btn-info" data-toggle="modal" data-target="#modalComment">Add comment</button>
 </p>
 <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">

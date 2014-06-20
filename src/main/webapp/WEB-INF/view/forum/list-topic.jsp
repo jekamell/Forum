@@ -8,6 +8,7 @@
         <c:forEach items="${topicList}" var="topic">
             <h3><a href="<s:url value="/topic/show/${topic.id}" />"><dt>${topic.title}</dt></a></h3>
             <small class="text-muted">${topic.content}</small>
+            <hr />
         </c:forEach>
     </dl>
 </div>
