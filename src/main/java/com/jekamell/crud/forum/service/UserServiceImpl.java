@@ -28,7 +28,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUserName(String userName) {
-        return hibernateUserDao.getUser(userName);
+        return hibernateUserDao.getUserByLogin(userName);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return hibernateUserDao.getUserByEmail(email);
     }
 
     @Override

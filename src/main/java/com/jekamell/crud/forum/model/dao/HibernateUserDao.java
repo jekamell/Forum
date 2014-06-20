@@ -25,11 +25,25 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-    public User getUser(String userName) {
+    public User getUserByLogin(String userName) {
         Query query = currentSession().createQuery("from User where login = :login");
         query.setString("login", userName);
         List<User> users = query.list();
         if(!users.isEmpty()) {
+
+            return users.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public User getUserByEmail(String email) {
+        Query query = currentSession().createQuery("from User where email = :email");
+        query.setString("email", email);
+        List<User> users = query.list();
+        if (!users.isEmpty()) {
 
             return users.get(0);
         }

@@ -1,5 +1,9 @@
 package com.jekamell.crud.forum.model;
 
+import com.jekamell.crud.forum.annotation.UniqueEmail;
+import com.jekamell.crud.forum.annotation.UniqueLogin;
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,6 +19,7 @@ public class User {
     @Column(name = "login", unique = true)
     @Size(min = 6, max = 20, message = "Username length cant be less then 6 and longer then 20")
     @Pattern(regexp = "^\\w+$", message = "Username can contains alphanumeric only")
+    @UniqueLogin(message = "Username already exists")
     private String login;
 
     @Column(name = "password")
@@ -22,7 +27,8 @@ public class User {
     private String password;
 
     @Column(name = "email")
-    @Pattern(regexp="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid E-mail address")
+    @Email(message = "Invalid E-mail address")
+    @UniqueEmail(message = "Email already exists")
     private String email;
 
     @ManyToOne
