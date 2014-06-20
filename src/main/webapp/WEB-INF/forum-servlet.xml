@@ -16,9 +16,7 @@
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass">
-            <value>
-                org.springframework.web.servlet.view.tiles2.TilesView
-            </value>
+            <value>org.springframework.web.servlet.view.tiles2.TilesView</value>
         </property>
     </bean>
     <bean id="tilesConfigurer"
@@ -40,9 +38,9 @@
                 <prop key="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.connection.Useunicode">true</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
                 <prop key="hibernate.connection.charSet">UTF-8</prop>
-                <prop key="connection.characterEncoding">UTF-8</prop>
+                <prop key="hibernate.connection.characterEncoding">UTF-8</prop>
             </props>
         </property>
     </bean>

@@ -15,12 +15,12 @@
 
     <definition name="add-topic" extends="template-base">
         <put-attribute name="title" value="Add topic"/>
-        <put-attribute name="content" value="/WEB-INF/view/forum/add-topic.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/forum/form-topic.jsp"/>
     </definition>
 
     <definition name="show-topic" extends="template-base">
         <put-attribute name="title" value="Add topic"/>
-        <put-attribute name="content" value="/WEB-INF/view/forum/show-topic.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/view/forum/topic.jsp"/>
     </definition>
 
     <definition name="list-category" extends="template-base">
