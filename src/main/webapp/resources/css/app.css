@@ -1,0 +1,48 @@
+/*topic*/
+.wMain {
+    background-color: #dff0d8;
+
+}
+
+.wImageName {
+    float: left;
+    padding-right: 15px;
+    text-align: center;
+    width: 135px;
+}
+.wImageName strong {
+    color: #404040;
+    font-size: 15px;
+}
+
+.wImageName img {
+    display: inline-block;
+    margin-top: 15px;
+    max-width: 100px;
+}
+
+.wContent {
+    margin-left: 165px;
+}
+
+.wContent h2 {
+    border-bottom: 1px solid #aaaaaa;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0 10px 10px;
+    margin: 0 0 15px;
+}
+
+.wContent p {
+    padding: 0 10px 15px;
+}
+
+.wDate {
+    color: #888888;
+    display: inline-block;
+    font-size: 10px;
+    font-style: normal;
+    line-height: 140%;
+    padding-left: 10px;
+
+}

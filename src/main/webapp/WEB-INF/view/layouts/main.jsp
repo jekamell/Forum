@@ -6,6 +6,7 @@
 <head>
     <title>Forum :: <tiles:insertAttribute name="title"/></title>
     <link rel="stylesheet" href="<s:url value="/resources" />/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="<s:url value="/resources" />/css/app.css" type="text/css"/>
     <script src="<s:url value="/resources" />/js/jquery.min.js"></script>
     <script src="<s:url value="/resources" />/js/bootstrap.js"></script>
 </head>
