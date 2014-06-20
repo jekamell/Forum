@@ -10,6 +10,9 @@
         <intercept-url pattern="/category/**/add-topic" access="hasRole('ROLE_USER') "/>
         <intercept-url pattern="/topic/add-comment" access="hasRole('ROLE_USER') "/>
 
+        <remember-me key="authKey" remember-me-parameter="remember" token-validity-seconds="2419200"/>
+
+
         <form-login login-processing-url="/auth/login"
                     login-page="/login"
                     authentication-failure-url="/login?error"

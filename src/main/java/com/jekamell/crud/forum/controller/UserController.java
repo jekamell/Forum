@@ -48,7 +48,7 @@ public class UserController {
     ) {
 
         if (bindingResult.hasErrors()) {
-            return "user/registration-form";
+            return "user-registration-form";
         }
 
         userService.addUser(user);
