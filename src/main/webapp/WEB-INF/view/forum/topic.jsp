@@ -1,11 +1,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <legend>${topic.title}</legend>
-
-<p>
-    <button class="btn btn-info" data-toggle="modal" data-target="#modalComment">Add comment</button>
-</p>
-
 
 <div class="well wMain">
     <div class="wImageName">
@@ -14,21 +11,33 @@
     </div>
     <div class="wContent">
         <em class="wDate">11.11.11 11:11:11</em>
-        <h2>title</h2>
+        <h2>${topic.title}</h2>
         <p>${topic.content}</p>
     </div>
-
-    <%--<div></div>--%>
-
 </div>
 <hr/>
+<p>
+    <security:authorize access="isAuthenticated()">
+        <button class="btn btn-info" data-toggle="modal" data-target="#modalComment">Add comment</button>
+    </security:authorize>
+    <security:authorize access="!isAuthenticated()">
+        You must be <a href="/auth/login">logged in</a> to post a comment.
+    </security:authorize>
+</p>
 
 <c:forEach items="${topic.comments}" var="comment">
-    <div class="well">${comment.content}</div>
+    <div class="well">
+        <div class="wImageName">
+            <strong>${comment.user.login}</strong>
+            <img src="/" alt="username"/>
+        </div>
+        <div class="wContent">
+            <em class="wDate"><fmt:formatDate value="${comment.dateAdd}" pattern="yyyy-MM-dd HH:mm" /> </em>
+            <h2>${topic.title}</h2>
+            <p>${comment.content}</p>
+        </div>
+    </div>
 </c:forEach>
-<p>
-    <button class="btn btn btn-info" data-toggle="modal" data-target="#modalComment">Add comment</button>
-</p>
 <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <sf:form method="POST" action="/topic/add-comment" modelAttribute="comment" role="form"

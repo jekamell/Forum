@@ -1,7 +1,11 @@
 package com.jekamell.crud.forum.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "comment")
@@ -21,9 +25,17 @@ public class Comment {
     @Column(name = "id_author")
     private Long idAuthor;
 
+    @Column(name = "date_add")
+    @Type(type="timestamp")
+    private Date dateAdd;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_topic", referencedColumnName = "id", insertable = false, updatable = false)
     private Topic topic;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_author", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
 
     public Topic getTopic() {
         return topic;
@@ -63,5 +75,21 @@ public class Comment {
 
     public void setIdAuthor(Long idAuthor) {
         this.idAuthor = idAuthor;
+    }
+
+    public Date getDateAdd() {
+        return dateAdd;
+    }
+
+    public void setDateAdd(Date dateAdd) {
+        this.dateAdd = dateAdd;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
