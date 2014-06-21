@@ -6,7 +6,7 @@
 
 <div class="well wMain">
     <div class="wImageName">
-        <strong>User name</strong>
+        <strong>${topic.user.login}</strong>
         <img src="/" alt="username"/>
     </div>
     <div class="wContent">

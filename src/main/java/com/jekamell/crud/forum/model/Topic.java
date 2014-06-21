@@ -29,6 +29,10 @@ public class Topic {
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Comment.class, mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_author", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
+
     public List<Comment> getComments() {
         return comments;
     }
@@ -75,5 +79,13 @@ public class Topic {
 
     public void setId_category(Integer id_category) {
         this.id_category = id_category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
