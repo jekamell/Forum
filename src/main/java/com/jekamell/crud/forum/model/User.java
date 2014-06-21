@@ -17,7 +17,7 @@ public class User {
     private Long id;
 
     @Column(name = "login", unique = true)
-    @Size(min = 6, max = 20, message = "Username length cant be less then 6 and longer then 20")
+    @Size(min = 2, max = 20, message = "Username length cant be less then 6 and longer then 20")
     @Pattern(regexp = "^\\w+$", message = "Username can contains alphanumeric only")
     @UniqueLogin(message = "Username already exists")
     private String login;
@@ -31,8 +31,11 @@ public class User {
     @UniqueEmail(message = "Email already exists")
     private String email;
 
+    @Column(name = "id_role")
+    private Long idRole;
+
     @ManyToOne
-    @JoinColumn(name = "id_role")
+    @JoinColumn(name = "id_role", insertable = false, updatable = false)
     private UserRole role;
 
     @Column(name = "is_enabled")
@@ -84,5 +87,13 @@ public class User {
 
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
+    }
+
+    public Long getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(Long idRole) {
+        this.idRole = idRole;
     }
 }
