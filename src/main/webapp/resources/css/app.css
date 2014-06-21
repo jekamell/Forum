@@ -11,6 +11,7 @@
 }
 .wImageName strong {
     color: #404040;
+    display: block;
     font-size: 15px;
 }
 

@@ -2,7 +2,7 @@ package com.jekamell.crud.forum.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +22,9 @@ public class Topic {
 
     @Column(name = "id_author")
     private Long id_author;
+
+    @Column(name = "date_add")
+    private Date dateAdd;
 
     @Column(name = "id_category")
     private Integer id_category;
@@ -87,5 +90,13 @@ public class Topic {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getDateAdd() {
+        return dateAdd;
+    }
+
+    public void setDateAdd(Date dateAdd) {
+        this.dateAdd = dateAdd;
     }
 }

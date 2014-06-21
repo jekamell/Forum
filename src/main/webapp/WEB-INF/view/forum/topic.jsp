@@ -10,7 +10,7 @@
         <img src="/" alt="username"/>
     </div>
     <div class="wContent">
-        <em class="wDate">11.11.11 11:11:11</em>
+        <em class="wDate"><fmt:formatDate value="${topic.dateAdd}" pattern="dd.MM.yyyy HH:mm" /></em>
         <h2>${topic.title}</h2>
         <p>${topic.content}</p>
     </div>
@@ -32,7 +32,7 @@
             <img src="/" alt="username"/>
         </div>
         <div class="wContent">
-            <em class="wDate"><fmt:formatDate value="${comment.dateAdd}" pattern="yyyy-MM-dd HH:mm" /> </em>
+            <em class="wDate"><fmt:formatDate value="${comment.dateAdd}" pattern="dd.MM.yyyy HH:mm" /> </em>
             <h2>${topic.title}</h2>
             <p>${comment.content}</p>
         </div>
