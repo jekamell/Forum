@@ -1,6 +1,7 @@
 package com.jekamell.crud.forum.model.dao;
 
 import com.jekamell.crud.forum.model.User;
+import com.jekamell.crud.forum.model.UserRole;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
 
     @Override
     public void addUser(User user) {
+        user.setIdRole(UserRole.ROLE_USER);
+        user.setEnabled(true);
+
         currentSession().save(user);
     }
 

@@ -6,6 +6,8 @@ import java.util.Set;
 @Entity
 @Table(name = "user_role")
 public class UserRole {
+    public final static long ROLE_USER = 1;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
