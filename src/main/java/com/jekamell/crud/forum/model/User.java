@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.File;
 
 @Entity
 @Table(name = "user")
@@ -40,6 +41,8 @@ public class User {
 
     @Column(name = "is_enabled")
     private boolean isEnabled;
+
+    private String avatar;
 
     public Long getId() {
         return id;
@@ -95,5 +98,20 @@ public class User {
 
     public void setIdRole(Long idRole) {
         this.idRole = idRole;
+    }
+
+    //TODO: try to find solution how to get resource inside webapp
+    public String getAvatar() {
+        String webAppPath = "/home/mell/IdeaProjects/forum/src/main/webapp";
+        String basePath = webAppPath + "/resources/img/avatar/";
+
+        File avatar = new File(basePath + getId() + ".jpg");
+        System.out.println(basePath + getId() + ".jpg");
+        if (avatar.isFile()) {
+            this.avatar =  avatar.getPath().replaceAll(webAppPath, "");
+            return this.avatar;
+        }
+
+        return (basePath + "avatar-default.jpg").replaceAll(webAppPath, "");
     }
 }

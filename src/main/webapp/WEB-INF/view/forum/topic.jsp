@@ -3,11 +3,10 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <legend>${topic.title}</legend>
-
 <div class="well wMain">
     <div class="wImageName">
         <strong>${topic.user.login}</strong>
-        <img src="/" alt="username"/>
+        <img src="${topic.user.avatar}" alt="${topic.user.login}" class="img-thumbnail"/>
     </div>
     <div class="wContent">
         <em class="wDate"><fmt:formatDate value="${topic.dateAdd}" pattern="dd.MM.yyyy HH:mm" /></em>
@@ -29,7 +28,7 @@
     <div class="well">
         <div class="wImageName">
             <strong>${comment.user.login}</strong>
-            <img src="/" alt="username"/>
+            <img src="${comment.user.avatar}" alt="${comment.user.login}" class="img-thumbnail"/>
         </div>
         <div class="wContent">
             <em class="wDate"><fmt:formatDate value="${comment.dateAdd}" pattern="dd.MM.yyyy HH:mm" /> </em>
