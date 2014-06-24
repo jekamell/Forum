@@ -24,7 +24,7 @@ public class User {
     private String login;
 
     @Column(name = "password")
-    @Size(min = 6, max = 20, message = "Password length cant be less then 6 and longer then 20")
+    @Size(min = 6, message = "Password length cant be less then 6 and longer then 20")
     private String password;
 
     @Column(name = "email")
@@ -42,6 +42,17 @@ public class User {
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
+    @Column
+    @Size(min = 6, message = "Incorrect skype login")
+    private String skype;
+
+    @Column(name = "name_first")
+    private String nameFirst;
+
+    @Column(name = "name_last")
+    private String nameLast;
+
+    @Transient
     private String avatar;
 
     public Long getId() {
@@ -100,6 +111,30 @@ public class User {
         this.idRole = idRole;
     }
 
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getNameFirst() {
+        return nameFirst;
+    }
+
+    public void setNameFirst(String nameFirst) {
+        this.nameFirst = nameFirst;
+    }
+
+    public String getNameLast() {
+        return nameLast;
+    }
+
+    public void setNameLast(String nameLast) {
+        this.nameLast = nameLast;
+    }
+
     //TODO: try to find solution how to get resource inside webapp
     public String getAvatar() {
         String webAppPath = "/home/mell/IdeaProjects/forum/src/main/webapp";
@@ -114,4 +149,6 @@ public class User {
 
         return (basePath + "avatar-default.jpg").replaceAll(webAppPath, "");
     }
+
+
 }

@@ -5,6 +5,7 @@ import com.jekamell.crud.forum.model.UserRole;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -53,5 +54,12 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
         }
 
         return null;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        return getUserByLogin(auth.getName());
     }
 }

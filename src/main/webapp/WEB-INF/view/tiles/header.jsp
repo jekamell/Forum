@@ -58,7 +58,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="<s:url value="#" />">Edit profile</a></li>
+                            <li><a href="<s:url value="/profile/edit" />">Edit profile</a></li>
                             <li class="divider"></li>
                             <li><a href="<s:url value="/auth/logout" />">Logout</a></li>
                         </ul>

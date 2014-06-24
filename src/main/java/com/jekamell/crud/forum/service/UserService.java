@@ -7,4 +7,5 @@ public interface UserService extends UserDetailsService {
     void addUser(User user);
     User getUserByUserName(String userName);
     User getUserByEmail(String email);
+    User getCurrentUser();
 }

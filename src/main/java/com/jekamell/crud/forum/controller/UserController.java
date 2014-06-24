@@ -67,6 +67,27 @@ public class UserController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.GET)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public String changeProfileForm(Model model) {
+        User user = userService.getCurrentUser();
+        model.addAttribute(user);
+
+        return "change-profile-form";
+    }
+
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+    public String updateProfile(@Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+        }
+
+        model.addAttribute(user);
+
+        return "change-profile-form";
+    }
+
     private void validateImage(MultipartFile image) throws ImageUploadException {
         if (!image.getContentType().equals("image/jpeg")) {
             throw new ImageUploadException("Only JPG images accepted");

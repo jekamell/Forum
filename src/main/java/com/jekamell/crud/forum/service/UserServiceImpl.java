@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
+        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
         hibernateUserDao.addUser(user);
     }
 
@@ -34,6 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         return hibernateUserDao.getUserByEmail(email);
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return hibernateUserDao.getCurrentUser();
     }
 
     @Override
