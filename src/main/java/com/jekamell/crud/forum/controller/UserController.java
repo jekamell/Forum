@@ -24,7 +24,6 @@ import java.io.IOException;
 
 @Controller
 @Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
-@RequestMapping("/user")
 public class UserController {
     private UserService userService;
 
@@ -33,14 +32,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String registrationForm(Model model) {
         model.addAttribute(new User());
 
-        return "user-registration-form";
+        return "registration-form";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public String registerUser(@Valid User user,
                                BindingResult bindingResult,
@@ -48,7 +47,7 @@ public class UserController {
     ) {
 
         if (bindingResult.hasErrors()) {
-            return "user-registration-form";
+            return "registration-form";
         }
 
         userService.addUser(user);
@@ -61,7 +60,7 @@ public class UserController {
             }
         } catch (ImageUploadException e) {
             bindingResult.reject(e.getMessage());
-            return "user/registration-form";
+            return "registration-form";
 
         }
 

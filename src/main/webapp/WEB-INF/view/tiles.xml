@@ -28,12 +28,12 @@
         <put-attribute name="content" value="/WEB-INF/view/forum/list-category.jsp"/>
     </definition>
 
-    <definition name="user-registration-form" extends="template-base">
+    <definition name="registration-form" extends="template-base">
         <put-attribute name="title" value="Sign up"/>
         <put-attribute name="content" value="/WEB-INF/view/user/form-registration.jsp"/>
     </definition>
 
-    <definition name="user-auth-form" extends="template-base">
+    <definition name="auth-form" extends="template-base">
         <put-attribute name="title" value="Sign up"/>
         <put-attribute name="content" value="/WEB-INF/view/user/form-auth.jsp"/>
     </definition>
