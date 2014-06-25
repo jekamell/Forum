@@ -30,7 +30,6 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        user = (User) currentSession().merge(user);
         currentSession().merge(user);
     }
 
