@@ -29,6 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUser(User user) {
+        user.setLogin(getCurrentUser().getLogin()); // login must be unchanged! :)
+        hibernateUserDao.updateUser(user);
+    }
+
+    @Override
     public User getUserByUserName(String userName) {
         return hibernateUserDao.getUserByLogin(userName);
     }

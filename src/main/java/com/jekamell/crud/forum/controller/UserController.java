@@ -2,6 +2,8 @@ package com.jekamell.crud.forum.controller;
 
 import com.jekamell.crud.forum.model.User;
 import com.jekamell.crud.forum.service.UserService;
+import com.jekamell.crud.forum.validators.UniqueEmailValidator;
+import com.jekamell.crud.forum.validators.UniqueLoginValidator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,28 +11,24 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.WebUtils;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 
 @Controller
-@Transactional(propagation = Propagation.SUPPORTS, readOnly=true)
+@Transactional(propagation = Propagation.SUPPORTS, readOnly= true)
 public class UserController {
-    private UserService userService;
-
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+    @Autowired
+    private UniqueEmailValidator uniqueEmailValidator;
+    @Autowired
+    private UniqueLoginValidator uniqueLoginValidator;
 
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String registrationForm(Model model) {
@@ -78,14 +76,18 @@ public class UserController {
 
     @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public String updateProfile(@Valid User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
-        }
-
+    public String updateProfile(@Valid User user, BindingResult result, Model model) {
+        user.setId(userService.getCurrentUser().getId());
+        uniqueEmailValidator.validate(user, result);
+        uniqueLoginValidator.validate(user, result);
         model.addAttribute(user);
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+            return "change-profile-form";
+        }
+        userService.updateUser(user);
 
-        return "change-profile-form";
+        return "redirect:/user/change-profile-form?success=true";
     }
 
     private void validateImage(MultipartFile image) throws ImageUploadException {

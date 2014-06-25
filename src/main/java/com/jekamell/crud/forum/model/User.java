@@ -1,7 +1,5 @@
 package com.jekamell.crud.forum.model;
 
-import com.jekamell.crud.forum.annotation.UniqueEmail;
-import com.jekamell.crud.forum.annotation.UniqueLogin;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -11,6 +9,7 @@ import java.io.File;
 
 @Entity
 @Table(name = "user")
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +19,6 @@ public class User {
     @Column(name = "login", unique = true)
     @Size(min = 2, max = 20, message = "Username length cant be less then 6 and longer then 20")
     @Pattern(regexp = "^\\w+$", message = "Username can contains alphanumeric only")
-    @UniqueLogin(message = "Username already exists")
     private String login;
 
     @Column(name = "password")
@@ -29,7 +27,6 @@ public class User {
 
     @Column(name = "email")
     @Email(message = "Invalid E-mail address")
-    @UniqueEmail(message = "Email already exists")
     private String email;
 
     @Column(name = "id_role")
@@ -43,7 +40,6 @@ public class User {
     private boolean isEnabled;
 
     @Column
-    @Size(min = 6, message = "Incorrect skype login")
     private String skype;
 
     @Column(name = "name_first")
@@ -133,6 +129,10 @@ public class User {
 
     public void setNameLast(String nameLast) {
         this.nameLast = nameLast;
+    }
+
+    public boolean isNewRecord() {
+        return getId() == null;
     }
 
     //TODO: try to find solution how to get resource inside webapp

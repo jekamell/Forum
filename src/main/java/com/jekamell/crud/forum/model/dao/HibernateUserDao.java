@@ -29,6 +29,12 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
     }
 
     @Override
+    public void updateUser(User user) {
+        user = (User) currentSession().merge(user);
+        currentSession().merge(user);
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
     public User getUserByLogin(String userName) {
         Query query = currentSession().createQuery("from User where login = :login");

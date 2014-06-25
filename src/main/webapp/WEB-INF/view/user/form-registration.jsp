@@ -1,7 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="t" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <div>
     <legend>Registration</legend>
@@ -11,8 +7,7 @@
             <label for="user-login" class="col-sm-2 control-label">Login</label>
             <div class="col-sm-10">
                 <sf:input path="login" id="user-login" class="form-control" placeholder="User name"/>
-                <sf:errors path="login" cssClass="text-danger"  />
-
+                <sf:errors path="login" cssClass="text-danger" />
             </div>
         </div>
         <div class="form-group">

@@ -5,14 +5,13 @@
 <div>
     <legend>Change profile</legend>
     <s:form method="post" cssClass="form-horizontal" modelAttribute="user">
-        <fieldset disabled>
+        <s:hidden path="id" disabled="true" />
         <div class="form-group">
             <label class="col-sm-2 control-label">Login</label>
             <div class="col-sm-10">
-                <span class="form-control text-muted">${user.login}</span>
+                <sf:input path="login" id="user-login" class="form-control" readonly="true"/>
             </div>
         </div>
-        </fieldset>
 
         <div class="form-group">
             <label for="user-name-first" class="col-sm-2 control-label">First name</label>
