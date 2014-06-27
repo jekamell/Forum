@@ -2,6 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<ol class="breadcrumb">
+    <li><a href="<c:url value="/" />">Home</a></li>
+    <li><a href="<c:url value="/category/${topic.category.id}"/>">${topic.category.title}</a></li>
+    <li class="active">${topic.title}</li>
+</ol>
+
 <legend>${topic.title}</legend>
 <div class="well wMain">
     <div class="wImageName">
