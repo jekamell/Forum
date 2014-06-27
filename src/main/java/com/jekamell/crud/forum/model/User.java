@@ -29,11 +29,8 @@ public class User {
     @Email(message = "Invalid E-mail address")
     private String email;
 
-    @Column(name = "id_role")
-    private Long idRole;
-
     @ManyToOne
-    @JoinColumn(name = "id_role", insertable = false, updatable = false)
+    @JoinColumn(name = "id_role")
     private UserRole role;
 
     @Column(name = "is_enabled")
@@ -99,14 +96,6 @@ public class User {
         this.isEnabled = isEnabled;
     }
 
-    public Long getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(Long idRole) {
-        this.idRole = idRole;
-    }
-
     public String getSkype() {
         return skype;
     }
@@ -131,10 +120,6 @@ public class User {
         this.nameLast = nameLast;
     }
 
-    public boolean isNewRecord() {
-        return getId() == null;
-    }
-
     //TODO: try to find solution how to get resource inside webapp
     public String getAvatar() {
         String webAppPath = "/home/mell/IdeaProjects/forum/src/main/webapp";
@@ -149,6 +134,4 @@ public class User {
 
         return (basePath + "avatar-default.jpg").replaceAll(webAppPath, "");
     }
-
-
 }

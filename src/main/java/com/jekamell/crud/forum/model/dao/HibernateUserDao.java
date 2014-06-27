@@ -14,6 +14,8 @@ import java.util.List;
 
 @Service("hibernateUserDao")
 public class HibernateUserDao extends SessionContainer implements UserDao {
+    @Autowired
+    private UserRoleDao hibernateUserRoleDao;
 
     @Autowired
     public HibernateUserDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
@@ -22,7 +24,7 @@ public class HibernateUserDao extends SessionContainer implements UserDao {
 
     @Override
     public void addUser(User user) {
-        user.setIdRole(UserRole.ROLE_USER);
+        user.setRole(hibernateUserRoleDao.getRoleByCode("ROLE_USER"));
         user.setEnabled(true);
 
         currentSession().save(user);

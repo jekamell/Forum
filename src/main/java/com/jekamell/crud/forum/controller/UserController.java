@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -77,17 +76,23 @@ public class UserController {
     @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public String updateProfile(@Valid User user, BindingResult result, Model model) {
-        user.setId(userService.getCurrentUser().getId());
-        uniqueEmailValidator.validate(user, result);
-        uniqueLoginValidator.validate(user, result);
-        model.addAttribute(user);
+        User userCurrent = userService.getCurrentUser();
+        userCurrent.setNameFirst(user.getNameFirst());
+        userCurrent.setNameLast(user.getNameLast());
+        userCurrent.setEmail(user.getEmail());
+        userCurrent.setSkype(user.getSkype());
+
+        uniqueEmailValidator.validate(userCurrent, result);
+        uniqueLoginValidator.validate(userCurrent, result);
+
         if (result.hasErrors()) {
-            System.out.println(result.getAllErrors());
+            model.addAttribute(userCurrent);
             return "change-profile-form";
         }
-        userService.updateUser(user);
 
-        return "redirect:/user/change-profile-form?success=true";
+        userService.updateUser(userCurrent);
+
+        return "redirect:/profile/edit?success=true";
     }
 
     private void validateImage(MultipartFile image) throws ImageUploadException {
