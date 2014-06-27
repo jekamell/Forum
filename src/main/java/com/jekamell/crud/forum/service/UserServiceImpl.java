@@ -2,6 +2,7 @@ package com.jekamell.crud.forum.service;
 
 import com.jekamell.crud.forum.model.User;
 import com.jekamell.crud.forum.model.dao.UserDao;
+import com.jekamell.crud.forum.model.dao.UserRoleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
     private UserDao hibernateUserDao;
 
     @Autowired
+    private UserRoleDao hibernateUserRoleDao;
+
+    @Autowired
     public UserServiceImpl(UserDao hibernateUserDao) {
         this.hibernateUserDao = hibernateUserDao;
     }
@@ -25,28 +29,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
-        hibernateUserDao.addUser(user);
+        user.setRole(hibernateUserRoleDao.getByRole("ROLE_USER"));
+        user.setEnabled(true);
+        hibernateUserDao.add(user);
     }
 
     @Override
     public void updateUser(User user) {
-        user.setLogin(getCurrentUser().getLogin()); // login must be unchanged! :)
-        hibernateUserDao.updateUser(user);
+        user.setLogin(getLogged().getLogin()); // login must be unchanged! :)
+        hibernateUserDao.update(user);
     }
 
     @Override
     public User getUserByUserName(String userName) {
-        return hibernateUserDao.getUserByLogin(userName);
+        return hibernateUserDao.getByLogin(userName);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return hibernateUserDao.getUserByEmail(email);
+        return hibernateUserDao.getByEmail(email);
     }
 
     @Override
-    public User getCurrentUser() {
-        return hibernateUserDao.getCurrentUser();
+    public User getLogged() {
+        return hibernateUserDao.getLogged();
     }
 
     @Override

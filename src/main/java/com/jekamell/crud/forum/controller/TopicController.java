@@ -65,7 +65,6 @@ public class TopicController {
     @RequestMapping(value = "/topic/show/{id}", method = RequestMethod.GET)
     public String showTopic(@PathVariable Long id, Model model) {
         Topic topic = forumService.getTopic(id);
-        System.out.println(topic.getTitle());
         Comment comment = new Comment();
         comment.setTopic(forumService.getTopic(id));
         model.addAttribute(topic);

@@ -122,7 +122,6 @@ public class User {
         String basePath = webAppPath + "/resources/img/avatar/";
 
         File avatar = new File(basePath + getId() + ".jpg");
-        System.out.println(basePath + getId() + ".jpg");
         if (avatar.isFile()) {
             this.avatar =  avatar.getPath().replaceAll(webAppPath, "");
             return this.avatar;

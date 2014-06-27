@@ -1,7 +1,6 @@
 package com.jekamell.crud.forum.model.dao;
 
 import com.jekamell.crud.forum.model.Category;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,28 +9,27 @@ import java.util.List;
 
 @Service("hibernateCategoryDao")
 public class HibernateCategoryDao extends SessionContainer implements CategoryDao {
-
     @Autowired
     public HibernateCategoryDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
         super(sessionFactory, securityContextHolder);
     }
 
     @Override
-    public void addCategory(Category category) {
+    public void add(Category category) {
         currentSession().save(category);
     }
 
     @Override
-    public Category getCategoryById(Long id) {
-        return (Category) currentSession().get(Category.class, id);
-    }
-
-    @Override
-    public void saveCategory(Category category) {
+    public void update(Category category) {
         currentSession().update(category);
     }
 
+    @Override
+    public Category getById(Long id) {
+        return (Category) currentSession().get(Category.class, id);
+    }
+
     public List<Category> getAll() {
-        return currentSession().createSQLQuery("SELECT * FROM category").addEntity(Category.class).list();
+        return currentSession().createQuery("from Category").list();
     }
 }

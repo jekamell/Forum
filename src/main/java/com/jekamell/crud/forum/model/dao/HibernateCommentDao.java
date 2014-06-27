@@ -4,13 +4,12 @@ import com.jekamell.crud.forum.model.Comment;
 import com.jekamell.crud.forum.service.UserService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 @Service("hibernateCommentDao")
 public class HibernateCommentDao extends SessionContainer implements CommentDao {
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -18,15 +17,9 @@ public class HibernateCommentDao extends SessionContainer implements CommentDao 
         super(sessionFactory, securityContextHolder);
     }
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
     @Override
-    public void addComment(Comment comment) {
-        Authentication auth = getSecurityContextHolder().getContext().getAuthentication();
-        comment.setAuthor(userService.getUserByUserName(auth.getName()));
+    public void add(Comment comment) {
+        comment.setAuthor(userService.getLogged());
 
         currentSession().save(comment);
     }

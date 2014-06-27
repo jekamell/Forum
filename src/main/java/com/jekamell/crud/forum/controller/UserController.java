@@ -67,7 +67,7 @@ public class UserController {
     @RequestMapping(value = "/profile/edit", method = RequestMethod.GET)
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public String changeProfileForm(Model model) {
-        User user = userService.getCurrentUser();
+        User user = userService.getLogged();
         model.addAttribute(user);
 
         return "change-profile-form";
@@ -76,7 +76,7 @@ public class UserController {
     @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public String updateProfile(@Valid User user, BindingResult result, Model model) {
-        User userCurrent = userService.getCurrentUser();
+        User userCurrent = userService.getLogged();
         userCurrent.setNameFirst(user.getNameFirst());
         userCurrent.setNameLast(user.getNameLast());
         userCurrent.setEmail(user.getEmail());

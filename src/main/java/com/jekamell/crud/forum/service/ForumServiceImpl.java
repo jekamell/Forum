@@ -3,7 +3,6 @@ package com.jekamell.crud.forum.service;
 import com.jekamell.crud.forum.model.Category;
 import com.jekamell.crud.forum.model.Comment;
 import com.jekamell.crud.forum.model.Topic;
-import com.jekamell.crud.forum.model.User;
 import com.jekamell.crud.forum.model.dao.CategoryDao;
 import com.jekamell.crud.forum.model.dao.CommentDao;
 import com.jekamell.crud.forum.model.dao.TopicDao;
@@ -38,21 +37,26 @@ public class ForumServiceImpl implements ForumService {
 
     @Override
     public List<Topic> getTopicList(Long categoryId) {
-        return hibernateTopicDao.getAllByCategory(categoryId);
+        return hibernateTopicDao.getAllByCategoryId(categoryId);
     }
 
     @Override
     public void addTopic(Topic topic) {
-        hibernateTopicDao.addTopic(topic);
+        hibernateTopicDao.add(topic);
     }
 
     @Override
     public Topic getTopic(Long id) {
-        return hibernateTopicDao.getTopic(id);
+        return hibernateTopicDao.getById(id);
     }
 
     @Override
     public void addComment(Comment comment) {
-        hibernateCommentDao.addComment(comment);
+        hibernateCommentDao.add(comment);
+    }
+
+    @Override
+    public Category getCategory(Long id) {
+        return hibernateCategoryDao.getById(id);
     }
 }

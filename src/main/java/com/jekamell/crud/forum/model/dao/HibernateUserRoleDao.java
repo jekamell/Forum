@@ -15,10 +15,9 @@ public class HibernateUserRoleDao extends SessionContainer implements UserRoleDa
     }
 
     @Override
-    public UserRole getRoleByCode(String code) {
+    public UserRole getByRole(String code) {
         Query query = currentSession().createQuery("from UserRole where code = :code");
         query.setParameter("code", code);
-
-        return (UserRole) query.list().get(0);
+        return (UserRole) getSingleRow(query.list());
     }
 }

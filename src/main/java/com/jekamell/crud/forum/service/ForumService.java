@@ -9,8 +9,10 @@ import java.util.List;
 public interface ForumService {
     List<Category> getAllCategory();
     List<Topic> getTopicList(Long categoryId);
-    void addTopic(Topic topic);
     Topic getTopic(Long id);
+    Category getCategory(Long id);
+    void addTopic(Topic topic);
+
     void addComment(Comment comment);
 
 }
