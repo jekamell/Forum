@@ -18,7 +18,7 @@
                     authentication-failure-url="/login?error"
                     username-parameter="username"
                     password-parameter="password"/>
-        <logout logout-success-url="/" logout-url="/logout"/>
+        <logout logout-success-url="/" logout-url="/auth/logout"/>
     </http>
 
     <authentication-manager>
