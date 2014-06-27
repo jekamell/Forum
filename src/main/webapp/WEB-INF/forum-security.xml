@@ -22,7 +22,10 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider user-service-ref="userService"/>
+        <authentication-provider user-service-ref="userService">
+            <password-encoder hash="md5"/>
+        </authentication-provider>
+
     </authentication-manager>
 
     <beans:bean class="org.springframework.security.core.context.SecurityContextHolder" id="securityContextHolder"/>
