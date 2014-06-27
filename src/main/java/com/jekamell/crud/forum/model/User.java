@@ -13,19 +13,16 @@ import java.io.File;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "login", unique = true)
+    @Column(unique = true)
     @Size(min = 2, max = 20, message = "Username length cant be less then 6 and longer then 20")
     @Pattern(regexp = "^\\w+$", message = "Username can contains alphanumeric only")
     private String login;
 
-    @Column(name = "password")
     @Size(min = 6, message = "Password length cant be less then 6 and longer then 20")
     private String password;
 
-    @Column(name = "email")
     @Email(message = "Invalid E-mail address")
     private String email;
 
@@ -36,7 +33,6 @@ public class User {
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
-    @Column
     private String skype;
 
     @Column(name = "name_first")

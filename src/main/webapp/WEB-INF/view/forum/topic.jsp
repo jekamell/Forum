@@ -5,8 +5,8 @@
 <legend>${topic.title}</legend>
 <div class="well wMain">
     <div class="wImageName">
-        <strong>${topic.user.login}</strong>
-        <img src="${topic.user.avatar}" alt="${topic.user.login}" class="img-thumbnail"/>
+        <strong>${topic.author.login}</strong>
+        <img src="${topic.author.avatar}" alt="${topic.author.login}" class="img-thumbnail"/>
     </div>
     <div class="wContent">
         <em class="wDate"><fmt:formatDate value="${topic.dateAdd}" pattern="dd.MM.yyyy HH:mm" /></em>
@@ -27,8 +27,8 @@
 <c:forEach items="${topic.comments}" var="comment">
     <div class="well">
         <div class="wImageName">
-            <strong>${comment.user.login}</strong>
-            <img src="${comment.user.avatar}" alt="${comment.user.login}" class="img-thumbnail"/>
+            <strong>${comment.author.login}</strong>
+            <img src="${comment.author.avatar}" alt="${comment.author.login}" class="img-thumbnail"/>
         </div>
         <div class="wContent">
             <em class="wDate"><fmt:formatDate value="${comment.dateAdd}" pattern="dd.MM.yyyy HH:mm" /> </em>
@@ -39,15 +39,14 @@
 </c:forEach>
 <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <sf:form method="POST" action="/topic/add-comment" modelAttribute="comment" role="form"
-                 cssClass="form-horizontal">
+        <sf:form method="POST" action="/topic/add-comment" modelAttribute="comment" role="form" cssClass="form-horizontal">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="modalLabel">Add comment</h4>
                 </div>
                 <div class="modal-body">
-                    <sf:hidden path="idTopic"/>
+                    <sf:hidden path="topic.id"/>
                     <sf:textarea path="content" cssClass="form-control" rows="5"/>
                     <sf:errors path="content" cssClass="text-danger"/>
 

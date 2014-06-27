@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface TopicDao {
     void addTopic(Topic topic);
-    void saveTopic(Topic topic);
     List getAllByCategory(Long categoryId);
     Topic getTopic(Long id);
 }

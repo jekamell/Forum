@@ -42,9 +42,9 @@ public class TopicController {
     }
 
     @RequestMapping(value = "/category/{id}/add-topic", method = RequestMethod.GET)
-    public String showAddTopicForm(Model model, @PathVariable int id) {
+    public String showAddTopicForm(Model model, @PathVariable final long id) {
         Topic topic = new Topic();
-        topic.setId_category(id);
+        topic.setCategory(forumService.getCategory(id));
         model.addAttribute(topic);
 
         return "add-topic";
@@ -65,8 +65,9 @@ public class TopicController {
     @RequestMapping(value = "/topic/show/{id}", method = RequestMethod.GET)
     public String showTopic(@PathVariable Long id, Model model) {
         Topic topic = forumService.getTopic(id);
+        System.out.println(topic.getTitle());
         Comment comment = new Comment();
-        comment.setIdTopic(topic.getId());
+        comment.setTopic(forumService.getTopic(id));
         model.addAttribute(topic);
         model.addAttribute(comment);
         model.addAttribute("showModal", false);
@@ -77,7 +78,7 @@ public class TopicController {
     @RequestMapping(value = "/topic/add-comment", method = RequestMethod.POST)
     public String addComment(@Valid Comment comment, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            Topic topic = forumService.getTopic(comment.getIdTopic());
+            Topic topic = forumService.getTopic(comment.getTopic().getId());
             model.addAttribute(topic);
             model.addAttribute(comment);
             model.addAttribute("showModal", bindingResult.hasErrors());
@@ -86,6 +87,6 @@ public class TopicController {
         }
         forumService.addComment(comment);
 
-        return "redirect:/topic/show/" + comment.getIdTopic();
+        return "redirect:/topic/show/" + comment.getTopic().getId();
     }
 }

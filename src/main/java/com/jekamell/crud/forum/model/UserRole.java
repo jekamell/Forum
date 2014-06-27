@@ -9,14 +9,9 @@ public class UserRole {
     public final static long ROLE_USER = 1;
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(name="code")
     private String code;
-
-    @Column(name = "title")
     private String title;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)

@@ -1,6 +1,5 @@
 package com.jekamell.crud.forum.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -8,13 +7,8 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "title")
     private String title;
-
-    @Column(name = "description")
     private String description;
 
     public Long getId() {

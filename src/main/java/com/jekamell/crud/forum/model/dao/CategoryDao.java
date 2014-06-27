@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CategoryDao {
     void addCategory(Category category);
-    Category getCategoryById(Long id);
     void saveCategory(Category category);
+    Category getCategoryById(Long id);
     List getAll();
 }

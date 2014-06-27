@@ -26,7 +26,7 @@ public class HibernateCommentDao extends SessionContainer implements CommentDao 
     @Override
     public void addComment(Comment comment) {
         Authentication auth = getSecurityContextHolder().getContext().getAuthentication();
-        comment.setIdAuthor(userService.getUserByUserName(auth.getName()).getId());
+        comment.setAuthor(userService.getUserByUserName(auth.getName()));
 
         currentSession().save(comment);
     }

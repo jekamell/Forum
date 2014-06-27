@@ -3,7 +3,7 @@
 <div>
     <legend>Add topic</legend>
     <sf:form method="POST" action="/topic/add" modelAttribute="topic" role="form" cssClass="form-horizontal">
-        <sf:hidden path="id_category"/>
+        <sf:hidden path="category.id" />
         <div class="form-group">
             <label for="topic-title" class="col-sm-2 control-label">Title</label>
 

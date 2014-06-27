@@ -1,5 +1,6 @@
 package com.jekamell.crud.forum.model;
 
+import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -12,29 +13,26 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "title")
     @Size(min = 1, max = 255)
     private String title;
 
     @Size(min = 1, message = "Content cant be empty")
-    @Column(name = "content")
     private String content;
 
-    @Column(name = "id_author")
-    private Long id_author;
-
     @Column(name = "date_add")
+    @Type(type="timestamp")
     private Date dateAdd;
 
-    @Column(name = "id_category")
-    private Integer id_category;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_category", referencedColumnName = "id")
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_author", referencedColumnName = "id")
+    private User author;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Comment.class, mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Comment> comments;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_author", referencedColumnName = "id", insertable = false, updatable = false)
-    private User user;
 
     public List<Comment> getComments() {
         return comments;
@@ -68,28 +66,12 @@ public class Topic {
         this.content = content;
     }
 
-    public Long getId_author() {
-        return id_author;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setId_author(Long id_author) {
-        this.id_author = id_author;
-    }
-
-    public Integer getId_category() {
-        return id_category;
-    }
-
-    public void setId_category(Integer id_category) {
-        this.id_category = id_category;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
     public Date getDateAdd() {
@@ -98,5 +80,13 @@ public class Topic {
 
     public void setDateAdd(Date dateAdd) {
         this.dateAdd = dateAdd;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

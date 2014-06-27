@@ -28,14 +28,8 @@ public class HibernateTopicDao extends SessionContainer implements TopicDao {
 
     @Override
     public void addTopic(Topic topic) {
-        Authentication auth = getSecurityContextHolder().getContext().getAuthentication();
-        topic.setId_author(userService.getUserByUserName(auth.getName()).getId());
+        topic.setAuthor(userService.getCurrentUser());
         currentSession().save(topic);
-    }
-
-    @Override
-    public void saveTopic(Topic topic) {
-
     }
 
     @Override
@@ -46,13 +40,6 @@ public class HibernateTopicDao extends SessionContainer implements TopicDao {
 
     @Override
     public Topic getTopic(Long id) {
-        Query query = currentSession().createQuery("from Topic where id=:id");
-        query.setParameter("id", id);
-        List<Topic> topics = query.list();
-        if (!topics.isEmpty()) {
-             return topics.get(0);
-        }
-
-        return null;
+        return (Topic) currentSession().get(Topic.class, id);
     }
 }
