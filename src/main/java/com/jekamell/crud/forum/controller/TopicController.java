@@ -12,18 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.validation.Valid;
 
 @Controller
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class TopicController {
-    private ForumService forumService;
-
+public class TopicController extends com.jekamell.crud.forum.controller.Controller {
     @Autowired
-    public void setForumService(ForumService forumService) {
-        this.forumService = forumService;
-    }
+    private ForumService forumService;
 
     @RequestMapping(value = "/category", method = RequestMethod.GET)
     public String showCategoryList(Model model) {

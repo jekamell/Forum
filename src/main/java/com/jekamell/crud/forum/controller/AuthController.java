@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class AuthController {
+public class AuthController extends com.jekamell.crud.forum.controller.Controller {
     @Autowired
     private UserService userService;
 

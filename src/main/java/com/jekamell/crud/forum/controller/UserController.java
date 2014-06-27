@@ -20,8 +20,8 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
-@Transactional(propagation = Propagation.SUPPORTS, readOnly= true)
-public class UserController {
+@Transactional
+public class UserController extends com.jekamell.crud.forum.controller.Controller {
     @Autowired
     private UserService userService;
     @Autowired
