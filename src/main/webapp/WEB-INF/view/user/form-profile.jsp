@@ -4,7 +4,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <div>
     <legend>Change profile</legend>
-    <s:form method="post" cssClass="form-horizontal" modelAttribute="user">
+    <s:form method="post" enctype="multipart/form-data" cssClass="form-horizontal" modelAttribute="user">
         <s:hidden path="id" disabled="true" />
         <div class="form-group">
             <label class="col-sm-2 control-label">Login</label>
@@ -41,6 +41,14 @@
             <div class="col-sm-10">
                 <sf:input path="skype" id="user-skype" cssClass="form-control"/>
                 <sf:errors path="skype" cssClass="text-danger"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user-avatar" class="col-sm-2 control-label">Picture</label>
+            <div class="col-sm-10">
+                <img src="${user.avatar}" class="img-thumbnail" style="max-height: 150px;" />
+                <input type="file" name="avatar" id="user-avatar"/>
+                <sf:errors path="avatar" cssClass="text-danger"/>
             </div>
         </div>
         <div class="form-group">

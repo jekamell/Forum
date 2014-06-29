@@ -65,7 +65,6 @@ public class UserController extends com.jekamell.crud.forum.controller.Controlle
     }
 
     @RequestMapping(value = "/profile/edit", method = RequestMethod.GET)
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public String changeProfileForm(Model model) {
         User user = userService.getLogged();
         model.addAttribute(user);
@@ -74,8 +73,11 @@ public class UserController extends com.jekamell.crud.forum.controller.Controlle
     }
 
     @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
-    public String updateProfile(@Valid User user, BindingResult result, Model model) {
+    public String updateProfile(@Valid User user,
+                                BindingResult result,
+                                Model model,
+                                @RequestParam(value = "avatar", required = false) MultipartFile image
+    ) {
         User userCurrent = userService.getLogged();
         userCurrent.setNameFirst(user.getNameFirst());
         userCurrent.setNameLast(user.getNameLast());
@@ -92,6 +94,17 @@ public class UserController extends com.jekamell.crud.forum.controller.Controlle
 
         userService.updateUser(userCurrent);
 
+        try {
+            if (!image.isEmpty()) {
+                validateImage(image);
+
+                saveImage(userCurrent.getId() + ".jpg", image);
+            }
+        } catch (ImageUploadException e) {
+            result.reject(e.getMessage());
+            return "change-profile-form";
+
+        }
         return "redirect:/profile/edit?success=true";
     }
 
@@ -106,7 +119,7 @@ public class UserController extends com.jekamell.crud.forum.controller.Controlle
             super(message);
         }
     }
-
+    // TODO: find how to save to war
     private void saveImage(String fileName, MultipartFile image) throws ImageUploadException {
         try {
             File file = new File(getWebRootPath() + "/resources/img/avatar/" + fileName);
