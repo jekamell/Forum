@@ -1,4 +1,4 @@
-package com.jekamell.crud.forum.validators;
+package com.jekamell.crud.forum.validator;
 
 import com.jekamell.crud.forum.model.User;
 import com.jekamell.crud.forum.service.UserService;
@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class UniqueEmailValidator implements Validator {
+public class UniqueLoginValidator implements Validator {
     @Autowired
     private UserService userService;
 
@@ -20,10 +20,10 @@ public class UniqueEmailValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        if (!(userService.getUserByEmail(user.getEmail()) == null
-            || user.getId() == userService.getUserByEmail(user.getEmail()).getId())
+        if (!(userService.getUserByUserName(user.getLogin()) == null
+            || userService.getUserByUserName(user.getLogin()).getId() == user.getId())
         ) {
-            errors.rejectValue("email", "", "This email address already taken"); // TODO: message sources
+            errors.rejectValue("login", "", "This login name already taken"); // TODO: message sources
         }
     }
 }

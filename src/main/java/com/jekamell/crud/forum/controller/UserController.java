@@ -2,8 +2,8 @@ package com.jekamell.crud.forum.controller;
 
 import com.jekamell.crud.forum.model.User;
 import com.jekamell.crud.forum.service.UserService;
-import com.jekamell.crud.forum.validators.UniqueEmailValidator;
-import com.jekamell.crud.forum.validators.UniqueLoginValidator;
+import com.jekamell.crud.forum.validator.UniqueEmailValidator;
+import com.jekamell.crud.forum.validator.UniqueLoginValidator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
