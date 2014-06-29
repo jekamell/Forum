@@ -19,15 +19,11 @@ import java.util.List;
 @Service("userService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class UserServiceImpl implements UserService {
+    @Autowired
     private UserDao hibernateUserDao;
 
     @Autowired
     private UserRoleDao hibernateUserRoleDao;
-
-    @Autowired
-    public UserServiceImpl(UserDao hibernateUserDao) {
-        this.hibernateUserDao = hibernateUserDao;
-    }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)

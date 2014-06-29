@@ -16,22 +16,12 @@ import java.util.List;
 @Service("forumService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class ForumServiceImpl implements ForumService {
+    @Autowired
     private CategoryDao hibernateCategoryDao;
+    @Autowired
     private TopicDao hibernateTopicDao;
+    @Autowired
     private CommentDao hibernateCommentDao;
-
-    @Autowired
-    public void setHibernateCategoryDao(CategoryDao hibernateCategoryDao) {
-        this.hibernateCategoryDao = hibernateCategoryDao;
-    }
-    @Autowired
-    public void setHibernateTopicDao(TopicDao hibernateTopicDao) {
-        this.hibernateTopicDao = hibernateTopicDao;
-    }
-    @Autowired
-    public void setHibernateCommentDao(CommentDao hibernateCommentDao) {
-        this.hibernateCommentDao = hibernateCommentDao;
-    }
 
     @Override
     public List<Category> getAllCategory() {
