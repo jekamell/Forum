@@ -11,12 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("hibernateUserDao")
 @Transactional
-public class HibernateUserDao extends SessionContainer implements UserDao {
-    @Autowired
-    public HibernateUserDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
-        super(sessionFactory, securityContextHolder);
-    }
-
+public class HibernateUserDao extends ModelDao implements UserDao {
     @Override
     public void add(User user) {
         currentSession().save(user);

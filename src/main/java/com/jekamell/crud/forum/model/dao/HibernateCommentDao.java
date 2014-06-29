@@ -8,14 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service("hibernateCommentDao")
-public class HibernateCommentDao extends SessionContainer implements CommentDao {
+public class HibernateCommentDao extends ModelDao implements CommentDao {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    public HibernateCommentDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
-        super(sessionFactory, securityContextHolder);
-    }
 
     @Override
     public void add(Comment comment) {

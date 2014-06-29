@@ -8,11 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service("hibernateUserRoleDao")
-public class HibernateUserRoleDao extends SessionContainer implements UserRoleDao {
-    @Autowired
-    public HibernateUserRoleDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
-        super(sessionFactory, securityContextHolder);
-    }
+public class HibernateUserRoleDao extends ModelDao implements UserRoleDao {
 
     @Override
     public UserRole getByRole(String code) {

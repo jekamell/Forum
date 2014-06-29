@@ -8,14 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
-class SessionContainer {
+class ModelDao {
+    @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
     private SecurityContextHolder securityContextHolder;
-
-    public SessionContainer(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
-        this.sessionFactory = sessionFactory;
-        this.securityContextHolder = securityContextHolder;
-    }
 
     protected SecurityContextHolder getSecurityContextHolder() {
         return securityContextHolder;

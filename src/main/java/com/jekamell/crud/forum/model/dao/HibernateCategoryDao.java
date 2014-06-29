@@ -8,11 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("hibernateCategoryDao")
-public class HibernateCategoryDao extends SessionContainer implements CategoryDao {
-    @Autowired
-    public HibernateCategoryDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
-        super(sessionFactory, securityContextHolder);
-    }
+public class HibernateCategoryDao extends ModelDao implements CategoryDao {
 
     @Override
     public void add(Category category) {

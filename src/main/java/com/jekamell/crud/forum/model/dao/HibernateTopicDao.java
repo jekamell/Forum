@@ -9,14 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("hibernateTopicDao")
-public class HibernateTopicDao extends SessionContainer implements TopicDao {
+public class HibernateTopicDao extends ModelDao implements TopicDao {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    public HibernateTopicDao(SessionFactory sessionFactory, SecurityContextHolder securityContextHolder) {
-        super(sessionFactory, securityContextHolder);
-    }
 
     @Override
     public void add(Topic topic) {
