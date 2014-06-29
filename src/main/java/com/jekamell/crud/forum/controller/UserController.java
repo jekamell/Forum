@@ -7,8 +7,6 @@ import com.jekamell.crud.forum.validators.UniqueLoginValidator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
-@Transactional
 public class UserController extends com.jekamell.crud.forum.controller.Controller {
     @Autowired
     private UserService userService;
@@ -37,7 +34,6 @@ public class UserController extends com.jekamell.crud.forum.controller.Controlle
     }
 
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
     public String registerUser(@Valid User user,
                                BindingResult bindingResult,
                                @RequestParam(value = "avatar", required = false) MultipartFile image

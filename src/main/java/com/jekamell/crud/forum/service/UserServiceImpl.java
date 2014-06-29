@@ -9,12 +9,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class UserServiceImpl implements UserService {
     private UserDao hibernateUserDao;
 
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void addUser(User user) {
         user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
         user.setRole(hibernateUserRoleDao.getByRole("ROLE_USER"));
@@ -35,6 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updateUser(User user) {
         user.setLogin(getLogged().getLogin()); // login must be unchanged! :)
         hibernateUserDao.update(user);
