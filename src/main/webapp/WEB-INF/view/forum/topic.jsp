@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="/resources/js/tinymce/tinymce.min.js"></script>
 
 <ol class="breadcrumb">
     <li><a href="<c:url value="/" />">Home</a></li>
@@ -54,7 +55,7 @@
                 </div>
                 <div class="modal-body">
                     <sf:hidden path="topic.id"/>
-                    <sf:textarea path="content" cssClass="form-control" rows="5"/>
+                    <sf:textarea path="content" id="comment-text" cssClass="form-control" rows="5"/>
                     <sf:errors path="content" cssClass="text-danger"/>
 
                 </div>
@@ -72,3 +73,11 @@
         $('#modalComment').modal();
     </script>
 </c:if>
+
+
+<script>
+    tinymce.init({selector:'#comment-text',
+        menubar:false,
+        statusbar: false
+    });
+</script>

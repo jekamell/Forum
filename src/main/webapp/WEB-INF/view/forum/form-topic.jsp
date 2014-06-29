@@ -1,5 +1,6 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<script src="/resources/js/tinymce/tinymce.min.js"></script>
 <div>
     <legend>Add topic</legend>
     <sf:form method="POST" action="/topic/add" modelAttribute="topic" role="form" cssClass="form-horizontal">
@@ -29,3 +30,9 @@
         </div>
     </sf:form>
 </div>
+<script>
+    tinymce.init({selector:'#topic-content',
+        menubar:false,
+        statusbar: false
+    });
+</script>

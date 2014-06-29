@@ -2,18 +2,17 @@
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <div>
     <legend>Sign up</legend>
-    <spring:url var="authUrl" value="/auth/login"/>
-    <form method="post" class="form-horizontal" action="${authUrl}">
+    <form method="post" class="form-horizontal" action="<c:url value="/auth/login" />">
         <div class="form-group">
             <label for="user-login" class="col-sm-2 control-label">Login</label>
             <div class="col-sm-10">
-                <input type="text" id="user-login" name="username" class="form-control" placeholder="User name"/>
+                <input type="text" name="username" id="user-login" class="form-control" placeholder="User name" style="width: 33%" />
             </div>
         </div>
         <div class="form-group">
             <label for="user-password" class="col-sm-2 control-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" name="password" id="user-password" class="form-control" placeholder="Password"/>
+                <input type="password" name="password" id="user-password" class="form-control" placeholder="Password" style="width: 33%" />
             </div>
         </div>
         <div class="form-group">
